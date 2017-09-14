@@ -11,7 +11,7 @@ sacOnset = GetsacOnset(filename,1,240);
 % Parameters for the hit count
 Hit = 0;                                             % Starting value
 nonHit = 0;                                          % Statting value
-ePT = sacOnset - tTar;                                   % Effective Processing Time
+ePT = sacOnset - tTar;                               % Effective Processing Time
 compvec = double(LandPos == TarPos);                 % Hits and nonhits (0 - nonHit 1 - Hit) / comparison vector
 
 % Counts Hits

@@ -1,30 +1,22 @@
-
+%%%%%% Basic Analysis %%%%%%%%
 
 %Getting output variables from data
 filename = input('Please  select data file to load: ', 's');
-TarPos = GetTarPos(filename,1,240);
-LandPos = GetLandPos(filename,1, 240);
-tSac = GettSac(filename,1,240);
-tTar = GettTar(filename,1,240);
-sacOnset = GetsacOnset(filename,1,240);
+data = load(filename);
+tarloc = data(:,4);
+ansLoc = data(:,7);
+tTar = data(:,13);
+sacOnset = data(:,23);
+
 
 % Parameters for the hit count
 Hit = 0;                                             % Starting value
 nonHit = 0;                                          % Statting value
-ePT = sacOnset - tTar;                               % Effective Processing Time
-compvec = double(LandPos == TarPos);                 % Hits and nonhits (0 - nonHit 1 - Hit) / comparison vector
-
-% Counts Hits
-
-for i = 1:length(LandPos)
-if LandPos(i) == TarPos(i)
-    Hit = Hit + 1;
-else
-    nonHit = nonHit + 1;
-end
-end
-
+ePT = sacOnset - tTar;                                   % Effective Processing Time
+compvec = double(ansLoc == tarloc);                 % Hits and nonhits (0 - nonHit 1 - Hit) / comparison vector
 CompMat = [ compvec ePT ];                            % Hits and ePT
+
+
 
 % Hits plotted with effective processing time
 scatter(ePT,compvec);
@@ -53,13 +45,3 @@ end
 scatter(timev,vecB)
 ylabel ('Proportion of correct answers')
 xlabel ('Effective Processing Time')
-
-
-
-
-
-
-
-
-
-
